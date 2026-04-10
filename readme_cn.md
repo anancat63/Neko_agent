@@ -99,47 +99,24 @@ CLI 启动时会把 `cwd` 设为进程当前目录（支持通过 `NEKO_AGENT_CW
 
 ## 快速上手（Windows / CMD）
 
-下面分两步：先用 venv 本地验证 OK；再安装到系统 base 环境，以后在任何目录直接 `agent` 启动。
+下面分两步：先用 venv 本地验证 OK；再安装到系统 base 环境，以后在任何目录直接 `python -m neko_agent` 启动。
 
 ### 1) 用 venv 本地测试
 
 ```powershell
-git clone https://github.com/<yourname>/Shibuyaneko_agent.git
-cd Shibuyaneko_agent\neko_agent
-
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-
 pip install -e .
 ```
 
-可选安装：
 
-```powershell
-# 安装全部 Provider（额外包含 Claude/Gemini 官方 SDK）
-pip install -e ".[all]"
-
-# 开发依赖（pytest 等）
-pip install -e ".[dev]"
-```
-
-设置环境变量（二选一：写到当前目录的 `.env`，或直接在终端里 set）。
+设置环境变量（：写到当前目录的 `.env`）。
 
 推荐：在你准备让助手工作的项目目录创建 `.env`（CLI 会优先读取启动目录下的 `.env`）：
 
 ```env
-# 任选其一：设置 NEKO_PROVIDER 显式指定（也可以不设，系统会按 key 自动识别）
-NEKO_PROVIDER=minimax
-
-# 对应 Provider 的 key（二选一即可）
-MINIMAX_API_KEY=xxxx
-# 或 OPENAI_API_KEY=xxxx
-# 或 ANTHROPIC_API_KEY=xxxx
-# 或 GEMINI_API_KEY=xxxx
-
-# 可选：覆盖模型
-# MODEL=gpt-4o
-```
+系统会按 key 自动识别
+# 填写对应 Provider 的 key
 
 启动交互式编程助手：
 
@@ -152,14 +129,13 @@ python -m neko_agent
 退出 venv 后，在系统 Python（base）里进行可编辑安装：
 
 ```powershell
-deactivate
 pip install -e .
 ```
 
 安装完成后，你可以在任意项目目录直接运行：
 
 ```powershell
-agent
+python -m neko_agent
 ```
 
 Neko Agent 会以“你启动命令时所在的路径”为工作目录读取/搜索/修改文件；如果你需要强制指定工作目录，可设置：
@@ -170,16 +146,6 @@ setx NEKO_AGENT_CWD "D:\your\project"
 
 ---
 
-## 常用环境变量速查
-
-- 选择 Provider（可选）：`NEKO_PROVIDER`（diy / anthropic / minimax / openai / gemini / kimi / deepseek / qwen）
-- API Key：
-  - `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` / `MINIMAX_API_KEY` / `KIMI_API_KEY` / `DEEPSEEK_API_KEY` / `QWEN_API_KEY`
-  - DIY：`DIY_API_KEY` + `DIY_BASE_URL`（可选 `DIY_MODEL` / `DIY_API_FORMAT`）
-- 覆盖模型（可选）：`MODEL`
-- 固定工作目录（可选）：`NEKO_AGENT_CWD`
-
----
 
 ## 二次开发
 
