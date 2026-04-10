@@ -1,0 +1,43 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Build output
+build/
+dist/
+*.egg-info/
+
+# Environment
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large files
+*.pt
+*.pth
+*.bin
+*.ckpt
+*.safetensors
+
+# Node
+node_modules/
